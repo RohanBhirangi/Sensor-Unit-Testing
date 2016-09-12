@@ -1,0 +1,20 @@
+"""
+This unit test checks the 'get_acceleration()' call.
+"""
+
+start_sensing(1, 0)
+
+z_desired=9.8
+
+x,y,z = get_acceleration()
+
+if z>z_desired:
+	result=z-z_desired
+else:
+	result=z_desired-z
+
+if result < 0.2:
+  log("get_acceleration() gives value in the range of [9.6,10.0]!",'\n')
+
+if end - start > 0.2:
+  log("get_acceleration() doesn't give value in the range of [9.6,10.0]!",'\n')
