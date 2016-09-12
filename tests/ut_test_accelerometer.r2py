@@ -18,3 +18,5 @@ if result < 0.2:
 
 if end - start > 0.2:
   log("get_acceleration() doesn't give value in the range of [9.6,10.0]!",'\n')
+
+stop_sensing()
