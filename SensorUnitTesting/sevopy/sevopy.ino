@@ -21,6 +21,10 @@ void loop()
     {
       servo1.writeMicroseconds(1500);
     }
+    else if (check == 'p')
+    {
+      servo1.writeMicroseconds(1000);
+    }
   }
   delay(100);
 }

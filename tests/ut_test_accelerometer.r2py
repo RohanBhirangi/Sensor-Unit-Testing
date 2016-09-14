@@ -1,26 +1,24 @@
 """
 This unit test checks the 'get_acceleration()' call.
+If your device(smartphone) lies flat on a table, the value of acceleration on z-axis should be around 9.8
+This unit tests checks whether the value of z-accelerati
 """
 
 start_sensing(1, 0)
 
 z_desired=9.8
-log(z_desired)
 
 x,y,z = get_acceleration()
-log(z)
 
 if z>z_desired:
 	result=z-z_desired
-	log(result)
 else:
 	result=z_desired-z
-	log(result)
 
-if result < 0.2:
-  log("get_acceleration() gives value in the range of [9.6,10.0]!",'\n')
+if result <= 0.2:
+  log("Acceleration along z-axis IS in the range [9.6,10.0]!",'\n')
 
 if result > 0.2:
-  log("get_acceleration() doesn't give value in the range of [9.6,10.0]!",'\n')
+  log("Acceleration along z-axis IS NOT in the range [9.6,10.0]!",'\n')
 
 stop_sensing()
