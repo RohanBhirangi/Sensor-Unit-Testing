@@ -5,18 +5,22 @@ This unit test checks the 'get_acceleration()' call.
 start_sensing(1, 0)
 
 z_desired=9.8
+log(z_desired)
 
 x,y,z = get_acceleration()
+log(z)
 
 if z>z_desired:
 	result=z-z_desired
+	log(result)
 else:
 	result=z_desired-z
+	log(result)
 
 if result < 0.2:
   log("get_acceleration() gives value in the range of [9.6,10.0]!",'\n')
 
-if end - start > 0.2:
+if result > 0.2:
   log("get_acceleration() doesn't give value in the range of [9.6,10.0]!",'\n')
 
 stop_sensing()
