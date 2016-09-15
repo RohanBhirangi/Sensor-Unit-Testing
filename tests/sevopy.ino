@@ -1,3 +1,14 @@
+"""
+This program controls the servo (turn table)
+This is the code that will be uploaded to
+the Arduino board
+The Arduino is controlled by the ut_test.py
+which prints 'y' or 'n' to the serial port.
+This causes the turn table to move clockwise
+or anti clockwise
+"""
+
+
 #include <Servo.h>
 
 Servo servo1;
