@@ -51,12 +51,9 @@ to access Sensibility Sensor APIs through Python
 """
 def get_acceleration():
 	return 0.0,0.0,9.8
-
-def main():
+		
+if __name__ == '__main__':
 	time.sleep(3)
 	while True: 		
 		turn_table_right()
 		turn_table_left()
-		
-if __name__ == '__main__':
-	main()
