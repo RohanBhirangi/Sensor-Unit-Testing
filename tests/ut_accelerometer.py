@@ -1,5 +1,6 @@
 import sys
 import seash_dictionary
+import seash_global_variables
 import command_callbacks
 import seash_helper
 import time
@@ -60,9 +61,10 @@ def show_files_ontarget(filename,environment_dict):
 	input_dict=seash_dictionary.parse_command('show files')
 	command_callbacks.show_files(input_dict,environment_dict)
 
-def show_ip_ontarget(environment_dict):
-	input_dict=seash_dictionary.parse_command('show ip')
-	command_callbacks.show_ip(input_dict,environment_dict)
+def show_ip_ontarget():
+	for longname in seash_global_variables.targets[environment_dict['currenttarget']]:
+		thisnodeIP = seash_global_variables.vesselinfo[longname]['IP']
+	return thisnodeIP
 
 def execute_experiment(filename,environment_dict):
 	input_dict=seash_dictionary.parse_command('start dylink.r2py encasementlib.r2py sensor_layer.r2py '+filename+'.r2py')
@@ -76,8 +78,8 @@ def download_file(filename,environment_dict):
 	input_dict=seash_dictionary.parse_command('download '+filename+'.txt')
 	command_callbacks.download_filename(input_dict,environment_dict)
 
-def open_file(filename,environment_dict):
-	file = open(filename+'.txt.6bbe8be1d9173783c83aaf218d66cb0485305288_1224_v1', 'r')
+def open_file(filename,ip,environment_dict):
+	file = open(filename+'.txt.'+ip+'_1224_v1', 'r')
 	average=0
 	i=0
 	for line in file:
@@ -88,8 +90,11 @@ def open_file(filename,environment_dict):
 		z2=math.pow(float(sline[2]),2)
 		vector_length=math.sqrt(x2+y2+z2)
 		average=average+vector_length
-	print i
-	print average/i
+	average = average/i
+	if (average>=9.5) and (average<=10.1):
+		print 'OKAY! The acceleration values are as expected'
+	else:
+		print 'BAD! The acceleration values are not as expected'
 
 if __name__ == '__main__':
 	filename='accelerometer'
@@ -97,18 +102,14 @@ if __name__ == '__main__':
 	environment_dict=initialize()
 	update_time()
 	loadkeys_browse(keyname,environment_dict)
+	ip=show_ip_ontarget()
 	if len(sys.argv)>1:
 		upload_sensorlib(environment_dict)
 	upload_experiment(filename,environment_dict)
 	execute_experiment(filename,environment_dict)
 	time.sleep(20)
 	download_file(filename,environment_dict)
-	open_file(filename,environment_dict)
-
-
-
-
-
+	open_file(filename,ip,environment_dict)
 
 
 
