@@ -9,4 +9,4 @@ Task 3: Develop a python program which performs all the Seash functions (loadkey
 
 Task 4: Integrate all of the above into a single Unit testing framework for Sensibility Testbed.
 
-Contact: Rohan (rkb332@nyu.edu)
+Contact: Rohan Bhirangi (rkb332@nyu.edu)
